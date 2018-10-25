@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="stu_manage@10.31.158.18">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="stu_manage">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="bookdb"/>
+    <schema id="4" parent="1" name="db_book_manage"/>
+    <schema id="5" parent="1" name="db_class"/>
+    <schema id="6" parent="1" name="examination_system"/>
+    <schema id="7" parent="1" name="information_schema"/>
+    <schema id="8" parent="1" name="jieduaner"/>
+    <schema id="9" parent="1" name="mysql"/>
+    <schema id="10" parent="1" name="performance_schema"/>
+    <schema id="11" parent="1" name="school"/>
+    <schema id="12" parent="1" name="test"/>
+    <table id="13" parent="2" name="clazz"/>
+    <table id="14" parent="2" name="student"/>
+    <table id="15" parent="2" name="t_teacher"/>
+    <table id="16" parent="2" name="tb_user"/>
+    <column id="17" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="18" parent="13" name="cname">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="19" parent="13" name="xuhao">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="20" parent="13" name="jiaoshi">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="21" parent="13" name="thid">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="22" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="23" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="14" name="sname">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="25" parent="14" name="age">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="26" parent="14" name="sex">
+      <Position>4</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="27" parent="14" name="cid">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="28" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="29" parent="15" name="tremark">
+      <Position>1</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="30" parent="15" name="tname">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="31" parent="15" name="tage">
+      <Position>3</Position>
+      <DataType>int(10)|0</DataType>
+    </column>
+    <column id="32" parent="15" name="ttime">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="33" parent="15" name="tsubjects">
+      <Position>5</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="34" parent="15" name="tid">
+      <Position>6</Position>
+      <DataType>int(5)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <key id="35" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>tid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="36" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="37" parent="16" name="username">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="38" parent="16" name="password">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="39" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

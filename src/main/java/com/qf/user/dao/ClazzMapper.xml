@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.user.dao.ClazzMapper">
+
+    <!--<select id="selectAll" resultType="com.qf.user.model.Clazz">
+        select * from CLAZZ
+    </select>-->
+
+    <resultMap type="com.qf.user.model.Clazz" id="baseResultMap">
+        <id property="id" column="cid"/>
+        <result property="cname" column="cname"/>
+        <result property="xuhao" column="xuhao"/>
+        <result property="jiaoshi" column="jiaoshi"/>
+        <result property="thid" column="thid"/>
+        <!-- 关联一方:使用association标签，其中javaType是对Orders类中pojo包装类型的说明-->
+        <association property="teacher" javaType="com.qf.user.model.Teacher">
+            <id column="tid" property="tid"/>
+            <result column="tremark" property="tremark"/>
+            <result column="tname" property="tname"/>
+            <result column="tage" property="tage"/>
+            <result column="ttime" property="ttime"/>
+            <result column="tsubjects" property="tsubjects"/>
+        </association>
+    </resultMap>
+
+    <select id="selectAll" resultMap="baseResultMap" >
+        SELECT c.id AS cid,c.cname,c.xuhao,c.jiaoshi,c.thid,T.* FROM CLAZZ c LEFT JOIN T_TEACHER T ON c.thid=T.tid
+    </select>
+
+    <select id="select" resultMap="baseResultMap" >
+        SELECT c.id AS cid,c.cname,c.xuhao,c.jiaoshi,c.thid,T.* FROM CLAZZ c LEFT JOIN T_TEACHER T ON c.thid=T.tid where  CONCAT(c.cname,c.xuhao,c.jiaoshi,T.tname) LIKE CONCAT('%',#{str},'%')
+    </select>
+
+    <select id="countClazz" parameterType="Map" resultType="Integer">
+        SELECT COUNT(*) FROM CLAZZ c LEFT JOIN T_TEACHER T ON c.thid=T.tid
+        <where>
+            <if test="search!=null and search !=''">
+                CONCAT(c.cname,c.xuhao,c.jiaoshi,T.tname) LIKE BINARY '%${search}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="listClazz" parameterType="Map" resultMap="baseResultMap">
+        SELECT c.id AS cid,c.cname,c.xuhao,c.jiaoshi,c.thid,T.* FROM CLAZZ c LEFT JOIN T_TEACHER T ON c.thid=T.tid
+        <where>
+            <if test="search!=null and search !=''">
+                CONCAT(c.cname,c.xuhao,c.jiaoshi,T.tname) LIKE BINARY '%${search}%'
+            </if>
+        </where>
+        order by cid ${order} LIMIT ${offset},${rows}
+    </select>
+
+    <delete id="remove">
+        delete from CLAZZ where id=#{id}
+    </delete>
+
+    <select id="selectTeacher" resultType="com.qf.user.model.Teacher" >
+        select * from T_TEACHER
+    </select>
+
+    <update id="edit" parameterType="com.qf.user.model.Clazz">
+        update CLAZZ set cname=#{cname},xuhao=#{xuhao},jiaoshi=#{jiaoshi},thid=#{thid} where id = #{id}
+    </update>
+
+    <insert id="save" parameterType="com.qf.user.model.Clazz">
+        insert into CLAZZ(cname,xuhao,jiaoshi,thid) values(#{cname},#{xuhao},#{jiaoshi},#{thid})
+    </insert>
+
+    <select id="selectOneTeacher" resultType="com.qf.user.model.Teacher" >
+        select * from T_TEACHER where tid=#{thid}
+    </select>
+</mapper>

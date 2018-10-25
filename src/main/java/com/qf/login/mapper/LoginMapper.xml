@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.login.mapper.LoginMapper">
+    <!-- resultType返回值类型，一般与typealiaes起别名配合使用，Mybatis中参数的传递有四种基本数据类型、list集合、map集合、数组、对象，无论传哪一种参数都会放在map中所有如果不知道写啥，写map不会错-->
+    <insert id="addUser"   parameterType="com.qf.login.model.User">
+              INSERT  into tb_user (username,password) values (#{username},#{password})
+    </insert>
+
+    <!--因为返回的是单个类型所有用paramterType而不是paramterMap-->
+    <select id="findUserByNameAndPwd" resultType="com.qf.login.model.User" parameterType="com.qf.login.model.User">
+        SELECT t.username,t.password from tb_user t where username=#{username} and password=#{password}
+
+    </select>
+
+    <!--<select id="findUsersByUsername" resultType="model.User" parameterType="String">
+        select * from tb_user
+		where username = #{username}
+    </select>-->
+    
+</mapper>   

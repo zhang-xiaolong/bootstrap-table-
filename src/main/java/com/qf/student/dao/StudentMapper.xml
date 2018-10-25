@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.student.dao.StudentMapper">
+	
+	<resultMap id="baseResultMap" type="com.qf.student.model.Student">
+		<id property="id" column="id"/>
+		<result property="sname" column="sname"/>
+		<result property="age" column="age"/>
+		<result property="sex" column="sex"/>
+		<result property="cid" column="cid"/>
+		<!-- 关联一方:使用association标签，其中javaType是对Orders类中pojo包装类型的说明-->
+		<association property="clazz" javaType="com.qf.student.model.Clazz">
+			<id column="id" property="id"/>
+			<result column="cname" property="cname"/>
+		</association>
+	</resultMap>
+<!--搜索分页-->
+	<select id="selectData" parameterType="com.alibaba.fastjson.JSONObject" resultMap="baseResultMap">
+		select * from STUDENT s LEFT JOIN CLAZZ c ON s.cid=c.id
+		<where>
+			<if test="search!=''">
+				s.sname like concat('%',#{search},'%')or
+				s.age like concat('%',#{search},'%')or
+				s.sex like concat('%',#{search},'%')or
+				c.cname like concat('%',#{search},'%')
+			</if>
+		</where>
+		limit #{offset} , #{limit}
+	</select>
+	<select id="countStudent" parameterType="com.alibaba.fastjson.JSONObject" resultType="java.lang.Integer">
+		select count(*) from STUDENT s LEFT JOIN CLAZZ c ON s.cid=c.id
+		<where>
+			<if test="search!=''">
+				s.sname like concat('%',#{search},'%')or
+				s.age like concat('%',#{search},'%')or
+				s.sex like concat('%',#{search},'%')or
+				c.cname like concat('%',#{search},'%')
+			</if>
+		</where>
+	</select>
+	<!--查询所有班级信息-->
+	<select id="selectClazz" resultType="com.qf.student.model.Clazz">
+		SELECT * FROM CLAZZ
+	</select>
+
+	<!--修改学生信息-->
+	<update id="updateStu" parameterType="com.qf.student.model.Student">
+		UPDATE STUDENT SET sname=#{sname},age=#{age},sex=#{sex},cid=#{cid} WHERE id=#{id}
+	</update>
+
+	<!--删除学生信息-->
+	 <delete id="deleteStu" parameterType="Integer">
+		 DELETE FROM STUDENT WHERE ID=#{id}
+	 </delete>
+
+	<!--添加学生-->
+	<insert id="insertStu" parameterType="com.qf.student.model.Student">
+		INSERT INTO STUDENT (sname,age,sex,cid) VALUES (#{sname},#{age},#{sex},#{cid})
+	</insert>
+</mapper>
